@@ -59,6 +59,19 @@ li {
     animation: fadeIn 0.3s ease; /* Efekt pojawiania się */
 }
 
+.btn-usun {
+    background-color: #ff4444; /* Czerwony */
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-left: auto; /* Przesuwa przycisk do prawej krawędzi */
+}
+
+.btn-usun:hover {
+    background-color: #cc0000;
+}
+
 /* Styl dla elementu listy, który został "kliknięty" */
 li.checked {
     background-color: #1a4a1a; /* Ciemniejsza zieleń */

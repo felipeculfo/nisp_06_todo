@@ -6,27 +6,35 @@ przycisk.addEventListener('click', function() {
     const tekst = input.value;
 
     if (tekst.trim() !== "") {
-        // 1. Tworzymy element li
-        const nowyElement = document.createElement('li');
+        const li = document.createElement('li');
         
-        // 2. Tworzymy checkbox
+        // 1. Checkbox
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-
-        // 3. Dodajemy zdarzenie do checkboxa
         checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                nowyElement.classList.add('checked');
-            } else {
-                nowyElement.classList.remove('checked');
-            }
+            li.classList.toggle('checked');
         });
 
-        // 4. Składamy element w całość
-        nowyElement.appendChild(checkbox); // Najpierw checkbox
-        nowyElement.appendChild(document.createTextNode(tekst)); // Potem tekst
+        // 2. Kontener na tekst (żeby przycisk był osobno)
+        const span = document.createElement('span');
+        span.textContent = tekst;
+        span.style.flex = "1"; // Tekst zajmie całą wolną przestrzeń
+
+        // 3. Przycisk Usuń
+        const przyciskUsun = document.createElement('button');
+        przyciskUsun.textContent = 'Usuń';
+        przyciskUsun.classList.add('btn-usun'); // Dodamy mu osobny styl w CSS
         
-        lista.appendChild(nowyElement);
+        przyciskUsun.addEventListener('click', function() {
+            li.remove(); // To kasuje cały element li
+        });
+
+        // Składanie wszystkiego do kupy
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(przyciskUsun);
+        
+        lista.appendChild(li);
 
         input.value = "";
         input.focus();
