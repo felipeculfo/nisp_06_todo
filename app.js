@@ -1,31 +1,34 @@
 const przycisk = document.getElementById('mojPrzycisk');
-        const input = document.getElementById('mojePole');
-        const lista = document.getElementById('mojaLista');
+const input = document.getElementById('mojePole');
+const lista = document.getElementById('mojaLista');
 
-        przycisk.addEventListener('click', function() {
-            const tekst = input.value;
+przycisk.addEventListener('click', function() {
+    const tekst = input.value;
 
-            if (tekst.trim() !== "") {
-                // 1. Tworzymy nowy, pusty element <li>
-                const nowyElement = document.createElement('li');
-                
-                // 2. Wkładamy do niego tekst z inputa
-                nowyElement.textContent = tekst;
+    if (tekst.trim() !== "") {
+        // 1. Tworzymy element li
+        const nowyElement = document.createElement('li');
+        
+        // 2. Tworzymy checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
 
-                // 3. Dodajemy gotowy element do naszej listy <ul> na stronie
-                lista.appendChild(nowyElement);
-
-                // 4. Czyścimy pole tekstowe i ustawiamy na nim kursor
-                input.value = "";
-                input.focus();
+        // 3. Dodajemy zdarzenie do checkboxa
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                nowyElement.classList.add('checked');
             } else {
-                alert("Nie możesz dodać pustego elementu!");
+                nowyElement.classList.remove('checked');
             }
         });
 
-        // DODATEK: Obsługa klawisza Enter
-        input.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                przycisk.click();
-            }
-        });
+        // 4. Składamy element w całość
+        nowyElement.appendChild(checkbox); // Najpierw checkbox
+        nowyElement.appendChild(document.createTextNode(tekst)); // Potem tekst
+        
+        lista.appendChild(nowyElement);
+
+        input.value = "";
+        input.focus();
+    }
+});
